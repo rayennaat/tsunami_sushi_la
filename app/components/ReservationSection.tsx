@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Yusei_Magic } from "next/font/google";
 import { useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
+import { useLanguage } from "../i18n";
 
 const japaneseDisplay = Yusei_Magic({ subsets: ["latin"], weight: "400" });
 
@@ -24,6 +25,7 @@ function slideStyle(visible: boolean, direction: SlideDirection, delay = 0): CSS
 }
 
 export function ReservationSection({ counterImage }: ReservationSectionProps) {
+  const { text } = useLanguage();
   const textRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
 
@@ -66,19 +68,19 @@ export function ReservationSection({ counterImage }: ReservationSectionProps) {
           className="flex flex-col justify-center px-5 py-10 sm:px-8 lg:px-16 lg:py-12"
         >
           <p className={`${japaneseDisplay.className} text-3xl tracking-[0.08em] text-ginger`}>
-            Reservation
+            {text.reservation[0]}
           </p>
           <p className="mt-5 max-w-xl text-lg leading-8 text-rice/75">
-            Reserve for dine-in, group boxes, or pickup before the next wave hits.
+            {text.reservation[1]}
           </p>
           <div className="mt-8 grid gap-5 text-rice/82 sm:grid-cols-2">
             <div className="flex gap-3">
               <MapPin className="mt-1 size-5 shrink-0 text-ginger" aria-hidden="true" />
-              <p>Find the restaurant location on Google Maps</p>
+              <p>{text.reservation[2]}</p>
             </div>
             <div className="flex gap-3">
               <Clock3 className="mt-1 size-5 shrink-0 text-ginger" aria-hidden="true" />
-              <p>Call ahead for today&rsquo;s hours and table availability.</p>
+              <p>{text.reservation[3]}</p>
             </div>
           </div>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
@@ -87,7 +89,7 @@ export function ReservationSection({ counterImage }: ReservationSectionProps) {
               className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-rice px-7 font-bold text-ink transition hover:bg-ginger focus:outline-none focus:ring-2 focus:ring-ginger focus:ring-offset-2 focus:ring-offset-ink"
             >
               <Phone className="size-4" aria-hidden="true" />
-              Call to reserve
+              {text.reservation[4]}
             </a>
           </div>
         </div>

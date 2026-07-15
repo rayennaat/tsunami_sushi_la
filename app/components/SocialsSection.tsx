@@ -1,7 +1,8 @@
+"use client";
+
 import { Facebook, Instagram, Mail, Music2, Waves } from "lucide-react";
 import Link from "next/link";
-
-const exploreLinks = ["About", "Menu", "Reservation", "Reviews"];
+import { useLanguage } from "../i18n";
 
 const socialLinks = [
   { name: "Instagram", icon: Instagram, href: "https://www.instagram.com/tsunami_sushilab/" },
@@ -11,6 +12,8 @@ const socialLinks = [
 ];
 
 export function SocialsSection() {
+  const { text } = useLanguage();
+  const exploreLinks = ["about", "menu", "reservation", "reviews"];
   return (
     <footer id="socials" className="bg-ink px-5 pt-16 pb-8 text-rice sm:px-8">
       <div className="mx-auto max-w-7xl">
@@ -23,22 +26,22 @@ export function SocialsSection() {
               <span className="font-display text-2xl font-bold">Tsunami Sushi</span>
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-6 text-rice/60">
-              Modern sushi, fast choices, and a counter built around the craft.
+              {text.footer[0]}
             </p>
           </div>
 
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.16em] text-rice/40">
-              Explore
+              {text.footer[1]}
             </p>
             <ul className="mt-4 space-y-3 text-sm">
-              {exploreLinks.map((item) => (
+              {exploreLinks.map((item, index) => (
                 <li key={item}>
                   <Link
-                    href={`/#${item.toLowerCase()}`}
+                    href={`/#${item}`}
                     className="text-rice/70 transition hover:text-tuna"
                   >
-                    {item}
+                    {text.nav[index]}
                   </Link>
                 </li>
               ))}
@@ -47,7 +50,7 @@ export function SocialsSection() {
 
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.16em] text-rice/40">
-              Follow
+              {text.footer[2]}
             </p>
             <div className="mt-4 flex gap-3">
               {socialLinks.map(({ name, icon: Icon, href }) => (
@@ -65,8 +68,8 @@ export function SocialsSection() {
         </div>
 
         <div className="flex flex-col gap-2 pt-6 text-xs text-rice/40 sm:flex-row sm:items-center sm:justify-between">
-          <p>&copy; {new Date().getFullYear()} Tsunami Sushi. All rights reserved.</p>
-          <p>Tunis, Tunisia</p>
+          <p>&copy; {new Date().getFullYear()} Tsunami Sushi. {text.footer[3]}</p>
+          <p>{text.footer[4]}</p>
         </div>
       </div>
     </footer>

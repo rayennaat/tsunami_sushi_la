@@ -26,6 +26,16 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
 }
 
+html[dir="rtl"] body {
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+html[dir="rtl"] .hero-stage,
+html[dir="rtl"] #about,
+html[dir="rtl"] #reservation {
+  text-align: right;
+}
+
 ::selection {
   background: #d7443e;
   color: #fff8ec;

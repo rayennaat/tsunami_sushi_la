@@ -1,28 +1,15 @@
+"use client";
+
 import { ArrowUpRight, Flame, PackageOpen, Salad } from "lucide-react";
 import Image from "next/image";
 import { Yusei_Magic } from "next/font/google";
+import { useLanguage } from "../i18n";
 
 const japaneseDisplay = Yusei_Magic({ subsets: ["latin"], weight: "400" });
 
-const menuHighlights = [
-  {
-    icon: Salad,
-    title: "Fresh starters",
-    text: "Crisp salads, light bites, soups, and clean flavors to open the table.",
-  },
-  {
-    icon: Flame,
-    title: "Signature rolls",
-    text: "Crunchy rolls, chef creations, nigiri, sashimi, and bold combinations made to order.",
-  },
-  {
-    icon: PackageOpen,
-    title: "Boxes & bowls",
-    text: "Poke bowls, sushi boxes, and generous sharing sets for dine-in or takeaway.",
-  },
-];
-
 export function MenuSection() {
+  const { text } = useLanguage();
+  const menuHighlights = [[Salad, text.menu[3], text.menu[4]], [Flame, text.menu[5], text.menu[6]], [PackageOpen, text.menu[7], text.menu[8]]] as const;
   return (
     <section id="menu" data-reveal="fade" className="relative px-5 py-24 sm:px-8 lg:py-28">
       <div className="pointer-events-none absolute left-0 top-24 h-72 w-72 rounded-full bg-tuna/10 blur-3xl" />
@@ -33,18 +20,17 @@ export function MenuSection() {
           <p
             className={`${japaneseDisplay.className} section-eyebrow text-xl tracking-[0.12em] text-soy/60`}
           >
-            Taste the wave
+            {text.menu[0]}
           </p>
 
           <h2
             className={`${japaneseDisplay.className} section-title mt-3 text-5xl leading-tight tracking-[0.12em] text-tuna sm:text-6xl lg:text-7xl`}
           >
-            Our menu
+            {text.menu[1]}
           </h2>
 
           <p className="section-copy mx-auto mt-5 max-w-2xl text-lg leading-8 text-soy/70">
-            Pick your mood: fresh starters, crispy rolls, chef specials, sushi
-            boxes, poke bowls, noodles, and warm Japanese plates.
+            {text.menu[2]}
           </p>
         </div>
 
@@ -63,18 +49,18 @@ export function MenuSection() {
               </div>
 
               <div className="absolute left-5 top-5 rounded-full border border-rice/15 bg-ink/70 px-4 py-2 text-sm font-bold text-rice backdrop-blur">
-                Chef selection
+                {text.menu[9]}
               </div>
 
               <div className="absolute bottom-5 right-5 rounded-full bg-tuna px-4 py-2 text-sm font-bold text-white shadow-lg">
-                Fresh daily
+                {text.menu[10]}
               </div>
             </div>
           </div>
 
           <div>
             <div className="grid gap-4">
-              {menuHighlights.map(({ icon: Icon, title, text }) => (
+              {menuHighlights.map(([Icon, title, description]) => (
                 <article
                   key={title}
                   className="menu-card group rounded-[1.5rem] border border-soy/10 bg-white/75 p-5 shadow-sm backdrop-blur transition-colors duration-300 hover:border-tuna/30 hover:bg-white hover:shadow-soft"
@@ -89,7 +75,7 @@ export function MenuSection() {
                         {title}
                       </h3>
                       <p className="mt-2 text-base leading-7 text-soy/68">
-                        {text}
+                        {description}
                       </p>
                     </div>
                   </div>
@@ -103,7 +89,7 @@ export function MenuSection() {
               rel="noreferrer"
               className="menu-cta group mt-8 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-tuna px-7 font-bold text-white shadow-[0_16px_35px_rgba(215,68,62,0.28)] transition duration-300 hover:-translate-y-1 hover:bg-[#bd332e] focus:outline-none focus:ring-2 focus:ring-tuna focus:ring-offset-2 focus:ring-offset-rice"
             >
-              Explore the menu
+              {text.menu[11]}
               <ArrowUpRight
                 className="size-5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                 aria-hidden="true"

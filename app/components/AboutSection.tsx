@@ -1,10 +1,13 @@
+"use client";
+
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Yusei_Magic } from "next/font/google";
+import { useLanguage } from "../i18n";
 
 const japaneseDisplay = Yusei_Magic({ subsets: ["latin"], weight: "400" });
 
-function JapaneseRestaurantVisual() {
+function JapaneseRestaurantVisual({ label }: { label: string }) {
   return (
     <div className="about-visual section-copy relative mx-auto hidden h-[380px] w-full max-w-md sm:block lg:h-[430px]">
       {/* red sun */}
@@ -96,7 +99,7 @@ function JapaneseRestaurantVisual() {
         </div>
 
         <div className="about-bottom-label mx-auto mt-5 w-fit rounded-full border border-rice/10 bg-ink/70 px-5 py-3 text-sm font-bold text-rice/75 backdrop-blur">
-          Fresh cuts · Crunchy rolls · Chef boxes
+          {label}
         </div>
       </div>
     </div>
@@ -104,8 +107,8 @@ function JapaneseRestaurantVisual() {
 }
 
 export function AboutSection() {
-  const aboutText =
-    "Tsunami brings together sushi classics, crunchy rolls, chef creations, poke bowls, and sharing boxes made fresh to order. Every plate is built around bold flavor, fresh cuts, and a warm dining experience.";
+  const { text } = useLanguage();
+  const aboutText = text.about[1];
 
   return (
     <section
@@ -121,7 +124,7 @@ export function AboutSection() {
           <p
             className={`${japaneseDisplay.className} about-eyebrow text-xl tracking-[0.08em] text-ginger`}
           >
-            About Tsunami
+            {text.about[0]}
           </p>
 
           <div className="about-title-line mt-5 h-px w-24 bg-ginger/60" />
@@ -143,7 +146,7 @@ export function AboutSection() {
               href="/about"
               className="about-action-button group inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-rice px-7 font-bold text-ink transition duration-300 hover:-translate-y-1 hover:bg-ginger focus:outline-none focus:ring-2 focus:ring-ginger focus:ring-offset-2 focus:ring-offset-ink"
             >
-              Read our story
+              {text.about[2]}
               <ArrowRight
                 className="size-5 transition-transform duration-300 group-hover:translate-x-1"
                 aria-hidden="true"
@@ -154,12 +157,12 @@ export function AboutSection() {
               href="#menu"
               className="about-action-button inline-flex min-h-12 items-center justify-center rounded-full border border-rice/20 bg-rice/10 px-7 font-bold text-rice backdrop-blur transition duration-300 hover:-translate-y-1 hover:bg-rice hover:text-ink focus:outline-none focus:ring-2 focus:ring-ginger focus:ring-offset-2 focus:ring-offset-ink"
             >
-              See the menu
+              {text.about[3]}
             </Link>
           </div>
         </div>
 
-        <JapaneseRestaurantVisual />
+        <JapaneseRestaurantVisual label={text.about[4]} />
       </div>
     </section>
   );

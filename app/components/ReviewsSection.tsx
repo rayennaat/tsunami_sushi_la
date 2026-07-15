@@ -3,6 +3,7 @@
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { Yusei_Magic } from "next/font/google";
 import { useState } from "react";
+import { useLanguage } from "../i18n";
 
 const japaneseDisplay = Yusei_Magic({ subsets: ["latin"], weight: "400" });
 
@@ -30,6 +31,7 @@ const googleReviews = [
 ];
 
 export function ReviewsSection() {
+  const { text } = useLanguage();
   const [activeReview, setActiveReview] = useState(0);
   const review = googleReviews[activeReview];
 
@@ -49,10 +51,10 @@ export function ReviewsSection() {
         <h2
           className={`${japaneseDisplay.className} text-5xl uppercase leading-none tracking-[0.08em] text-ginger sm:text-6xl lg:text-7xl`}
         >
-          Reviews
+          {text.reviews[0]}
         </h2>
         <p className="mt-5 text-xs font-bold uppercase tracking-[0.28em] text-rice/65 sm:text-sm">
-          Consistently delicious
+          {text.reviews[1]}
         </p>
 
         <div className="mt-10 flex h-[390px] w-full flex-col items-center justify-center sm:mt-12 sm:h-[350px] lg:h-[320px]">
@@ -80,7 +82,7 @@ export function ReviewsSection() {
           <button
             type="button"
             onClick={showPreviousReview}
-            aria-label="Show previous review"
+            aria-label={text.reviews[2]}
             className="grid size-12 place-items-center rounded-full border active:scale-95 border-rice/30 text-rice transition hover:border-ginger hover:bg-ginger hover:text-nori focus:outline-none focus:ring-2 focus:ring-ginger focus:ring-offset-2 focus:ring-offset-nori"
           >
             <ChevronLeft className="size-5" aria-hidden="true" />
@@ -88,7 +90,7 @@ export function ReviewsSection() {
           <button
             type="button"
             onClick={showNextReview}
-            aria-label="Show next review"
+            aria-label={text.reviews[3]}
             className="grid size-12 place-items-center rounded-full border active:scale-95 border-rice/30 text-rice transition hover:border-ginger hover:bg-ginger hover:text-nori focus:outline-none focus:ring-2 focus:ring-ginger focus:ring-offset-2 focus:ring-offset-nori"
           >
             <ChevronRight className="size-5" aria-hidden="true" />

@@ -5,6 +5,8 @@ import Link from "next/link";
 import { Montserrat, Yusei_Magic } from "next/font/google";
 import { useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
+import { useLanguage } from "../i18n";
+import { LanguagePicker } from "../components/Header";
 
 const japaneseDisplay = Yusei_Magic({ subsets: ["latin"], weight: "400" });
 const locationNameFont = Montserrat({ subsets: ["latin"], weight: "700" });
@@ -50,6 +52,7 @@ function zoomStyle(visible: boolean, delay = 0): CSSProperties {
 }
 
 export default function ReservationPage() {
+  const { text } = useLanguage();
   const titleRef = useRef<HTMLDivElement>(null);
   const [titleVisible, setTitleVisible] = useState(false);
 
@@ -109,8 +112,9 @@ export default function ReservationPage() {
             className="inline-flex min-h-11 items-center gap-2 rounded-full bg-ink px-5 text-sm font-bold text-rice transition hover:bg-tuna focus:outline-none focus:ring-2 focus:ring-tuna focus:ring-offset-2 focus:ring-offset-rice"
           >
             <ArrowLeft className="size-4" aria-hidden="true" />
-            Back home
+            {text.common[0]}
           </Link>
+          <LanguagePicker />
         </div>
       </header>
 
@@ -118,10 +122,10 @@ export default function ReservationPage() {
         <div className="mx-auto max-w-7xl">
           <div ref={titleRef} style={fadeUpStyle(titleVisible)} className="mx-auto max-w-3xl text-center">
             <h1 className={`${japaneseDisplay.className} text-4xl tracking-[0.08em] text-tuna sm:text-5xl`}>
-              Reservation
+              {text.reservationPage[0]}
             </h1>
             <p className="mt-20 text-lg leading-8 text-soy/78">
-              Select the branch you want, check the map preview, then call the matching number to reserve your table.
+              {text.reservationPage[1]}
             </p>
           </div>
 
@@ -158,7 +162,7 @@ export default function ReservationPage() {
                 <div className="mt-5 flex flex-col gap-3 border-t border-soy/10 pt-5">
                   <div>
                     <p className="text-xs font-bold uppercase tracking-[0.16em] text-soy/50">
-                      Reservation number
+                      {text.reservationPage[2]}
                     </p>
                     <a
                       href={location.href}
@@ -174,7 +178,7 @@ export default function ReservationPage() {
                       className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-tuna px-6 font-bold text-white transition hover:bg-[#bd332e] focus:outline-none focus:ring-2 focus:ring-tuna focus:ring-offset-2 focus:ring-offset-rice"
                     >
                       <Phone className="size-4" aria-hidden="true" />
-                      Call to reserve
+                      {text.common[1]}
                     </a>
                     <a
                       href={location.map}
@@ -182,7 +186,7 @@ export default function ReservationPage() {
                       rel="noreferrer"
                       className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-soy/15 bg-white/60 px-6 font-bold text-soy transition hover:border-tuna hover:text-tuna focus:outline-none focus:ring-2 focus:ring-tuna focus:ring-offset-2 focus:ring-offset-rice"
                     >
-                      Open map
+                      {text.common[2]}
                       <ExternalLink className="size-4" aria-hidden="true" />
                     </a>
                   </div>

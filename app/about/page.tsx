@@ -6,6 +6,8 @@ import { Montserrat } from "next/font/google";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import type { CSSProperties, RefObject } from "react";
+import { useLanguage } from "../i18n";
+import { LanguagePicker } from "../components/Header";
 
 const aboutImage = "/pic1.png";
 const aboutImage2 = "/about22.png";
@@ -27,11 +29,6 @@ const branchHours = [
     name: "Tsunami Sushi Lab Menzah 5",
     schedule: [["Monday – Sunday", "11:30–23:00"]]
   }
-];
-
-const introParagraphs = [
-  "Tsunami Sushi is a modern neighborhood sushi spot focused on clear choices, fast service, and plates that still feel carefully made. The menu moves from crisp salads and classic nigiri to crunchy rolls, chef signatures, hot dishes, poke bowls, and generous sharing boxes.",
-  "The experience is designed around momentum: choose quickly, watch the counter work, and get food that feels fresh whether you are sitting down for dinner or picking up a box on the way home."
 ];
 
 type SlideDirection = "left" | "right";
@@ -79,6 +76,8 @@ function WrittenParagraph({
 }
 
 export default function AboutPage() {
+  const { text } = useLanguage();
+  const introParagraphs = [text.aboutPage[1], text.aboutPage[2]];
   const introRef = useRef<HTMLDivElement>(null);
   const heroImageRef = useRef<HTMLDivElement>(null);
   const secondImageRef = useRef<HTMLDivElement>(null);
@@ -130,14 +129,9 @@ export default function AboutPage() {
             className="inline-flex min-h-11 items-center gap-2 rounded-full bg-ink px-5 text-sm font-bold text-rice transition hover:bg-tuna focus:outline-none focus:ring-2 focus:ring-tuna focus:ring-offset-2 focus:ring-offset-rice"
           >
             <ArrowLeft className="size-4" aria-hidden="true" />
-            Back home
+            {text.common[0]}
           </Link>
-          <a
-            href="/reservation"
-            className="hidden min-h-11 items-center rounded-full border border-ink/15 px-5 text-sm font-bold text-soy transition hover:border-tuna hover:text-tuna focus:outline-none focus:ring-2 focus:ring-tuna focus:ring-offset-2 focus:ring-offset-rice sm:inline-flex"
-          >
-            Call to reserve
-          </a>
+          <div className="flex items-center gap-2"><LanguagePicker /><a href="/reservation" className="hidden min-h-11 items-center rounded-full border border-ink/15 px-5 text-sm font-bold text-soy transition hover:border-tuna hover:text-tuna sm:inline-flex">{text.common[1]}</a></div>
         </div>
       </header>
 
@@ -145,7 +139,7 @@ export default function AboutPage() {
         <div className="mx-auto pt-16 grid max-w-7xl gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
           <div ref={introRef} style={slideStyle(introVisible, "left")}>
             <p className="text-sm font-bold uppercase tracking-[0.22em] text-tuna">
-              About Tsunami
+              {text.aboutPage[0]}
             </p>
             <div className="mt-7 space-y-5 text-lg leading-8 text-soy/78">
               <WrittenParagraph text={introParagraphs[0]} visible={introVisible} baseDelay={150} />
@@ -196,7 +190,7 @@ export default function AboutPage() {
                 <Clock3 className="size-5" aria-hidden="true" />
               <div>
                 <p className="text-sm font-bold uppercase tracking-[0.18em] text-tuna">
-                  Open time
+                  {text.aboutPage[3]}
                 </p>
               </div>
             </div>
@@ -211,17 +205,20 @@ export default function AboutPage() {
                     {branch.name}
                   </h3>
                   <dl className="mt-3 divide-y divide-ink/10 text-sm">
-                    {branch.schedule.map(([days, time]) => (
+                    {branch.schedule.map(([days, time]) => {
+                      const translatedDays = days === "Monday – Saturday" ? text.aboutPage[4] : days === "Sunday" ? text.aboutPage[5] : text.aboutPage[6];
+                      const translatedTime = time === "Closed" ? text.aboutPage[7] : time;
+                      return (
                       <div
                         key={days}
                         className="grid gap-1 py-2.5 sm:grid-cols-[1fr_auto] sm:items-center"
                       >
-                        <dt className="font-semibold text-soy/75">{days}</dt>
+                        <dt className="font-semibold text-soy/75">{translatedDays}</dt>
                         <dd className={time === "Closed" ? "font-bold text-tuna" : "font-bold text-soy"}>
-                          {time}
+                          {translatedTime}
                         </dd>
                       </div>
-                    ))}
+                    )})}
                   </dl>
                 </section>
               ))}

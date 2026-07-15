@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
 import { MotionController } from "./components/MotionController";
 import { SocialsSection } from "./components/SocialsSection";
+import { LanguageProvider } from "./i18n";
 
 const display = Cormorant_Garamond({
   subsets: ["latin"],
@@ -34,9 +35,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${display.variable} ${sans.variable}`}>
       <body>
-        <MotionController />
-        {children}
-        <SocialsSection />
+        <LanguageProvider>
+          <MotionController />
+          {children}
+          <SocialsSection />
+        </LanguageProvider>
       </body>
     </html>
   );

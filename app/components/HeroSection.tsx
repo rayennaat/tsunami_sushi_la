@@ -1,16 +1,19 @@
+"use client";
+
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { Yusei_Magic } from "next/font/google";
+import { useLanguage } from "../i18n";
 
 const japaneseDisplay = Yusei_Magic({ subsets: ["latin"], weight: "400" });
-
-const titleWords = "Sushi with the force of a wave.".split(" ");
 
 type HeroSectionProps = {
   heroImage: string;
 };
 
 export function HeroSection({ heroImage }: HeroSectionProps) {
+  const { text } = useLanguage();
+  const titleWords = text.hero[1].split(" ");
   return (
     <section id="top" className="hero-stage relative min-h-dvh overflow-hidden bg-ink text-rice">
       <div className="hero-media absolute inset-0">
@@ -42,7 +45,7 @@ export function HeroSection({ heroImage }: HeroSectionProps) {
       <div className="relative z-10 mx-auto flex min-h-dvh max-w-7xl items-center px-5 pb-14 pt-32 sm:px-8">
         <div className="max-w-3xl">
           <p className="hero-kicker mb-5 inline-flex rounded-full border border-rice/20 bg-rice/10 px-4 py-2 text-sm font-semibold uppercase tracking-[0.28em] text-rice/80">
-            Fresh Japanese Taste
+            {text.hero[0]}
           </p>
 
           <h1
@@ -58,7 +61,7 @@ export function HeroSection({ heroImage }: HeroSectionProps) {
           </h1>
 
           <p className="hero-copy max-w-xl text-lg leading-8 text-rice/75 sm:text-xl">
-            Bold rolls, fresh cuts, and Japanese-inspired flavors served with the energy of a wave.
+            {text.hero[2]}
           </p>
 
           <div className="hero-actions mt-10 flex flex-col gap-3 sm:flex-row">
@@ -66,21 +69,21 @@ export function HeroSection({ heroImage }: HeroSectionProps) {
               href="/reservation"
               className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-tuna px-7 text-base font-bold text-white shadow-[0_18px_45px_rgba(215,68,62,0.28)] transition duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#bd332e] focus:outline-none focus:ring-2 focus:ring-ginger focus:ring-offset-2 focus:ring-offset-ink"
             >
-              Book a table
+              {text.hero[3]}
               <ArrowRight className="size-5 transition-transform duration-300 ease-out group-hover:translate-x-1" aria-hidden="true" />
             </a>
             <a
               href="#menu"
               className="inline-flex min-h-12 items-center justify-center rounded-full border border-rice/30 bg-rice/10 px-7 text-base font-bold text-rice transition duration-300 ease-out hover:-translate-y-0.5 hover:bg-rice hover:text-ink focus:outline-none focus:ring-2 focus:ring-ginger focus:ring-offset-2 focus:ring-offset-ink"
             >
-              View menu
+              {text.hero[4]}
             </a>
           </div>
         </div>
       </div>
 
       <div className="hero-scroll absolute bottom-8 left-1/2 z-20 hidden -translate-x-1/2 flex-col items-center gap-3 text-xs uppercase tracking-[0.3em] text-rice/50 sm:flex">
-        <span>Scroll</span>
+        <span>{text.hero[5]}</span>
         <span className="relative h-12 w-px overflow-hidden bg-rice/20">
           <span className="hero-scroll-line absolute left-0 top-0 h-6 w-px bg-rice" />
         </span>
