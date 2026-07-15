@@ -153,12 +153,6 @@ export function AboutSection() {
               />
             </Link>
 
-            <Link
-              href="#menu"
-              className="about-action-button inline-flex min-h-12 items-center justify-center rounded-full border border-rice/20 bg-rice/10 px-7 font-bold text-rice backdrop-blur transition duration-300 hover:-translate-y-1 hover:bg-rice hover:text-ink focus:outline-none focus:ring-2 focus:ring-ginger focus:ring-offset-2 focus:ring-offset-ink"
-            >
-              {text.about[3]}
-            </Link>
           </div>
         </div>
 
